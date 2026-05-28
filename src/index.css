@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+/* ============================================================
+   TAILWIND v4 — THEME
+   ============================================================ */
+
+@theme {
+  --font-sans: 'Urbanist', sans-serif;
+}
+
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+}
+
+
+/* ============================================================
+   NAVBAR — Glassmorphic container
+   Border wraps fully around the rounded shape
+   ============================================================ */
+
+.navbar-glass {
+  width: min(1288px, calc(100vw - 32px));
+  height: 80px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.52);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(44px);
+  backdrop-filter: blur(44px);
+  box-shadow:
+    0 10px 40px rgba(25, 31, 56, 0.06),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .navbar-glass {
+    width: min(1288px, calc(100vw - 32px));
+    height: auto;
+    padding: 14px 16px;
+    gap: 12px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar-glass {
+    width: calc(100vw - 20px);
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+}
+
+
+/* ============================================================
+   HERO BACKGROUNDS — Complex multi-layer gradients
+   ============================================================ */
+
+.hero-bg-primary {
+  background:
+    radial-gradient(circle at 90% 18%, rgba(159, 96, 255, 0.35), rgba(159, 96, 255, 0.04) 22%, transparent 45%),
+    radial-gradient(circle at 73% 85%, rgba(219, 255, 215, 0.40), transparent 20%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(244, 245, 247, 0.12) 100%),
+    url('/images/Hero_banner2.png') center/cover no-repeat;
+  filter: saturate(1.15) contrast(1.08) brightness(0.96);
+}
+
+.hero-bg-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 92% 16%, rgba(99, 31, 196, 0.15), transparent 20%),
+    radial-gradient(circle at 67% 84%, rgba(216, 255, 212, 0.18), transparent 25%),
+    linear-gradient(180deg, rgba(241, 243, 247, 0.05), rgba(223, 226, 233, 0.02));
+  pointer-events: none;
+}
+
+.hero-bg-secondary {
+  background: url('/images/hero_banner.jpg') center/cover no-repeat;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.05));
+}
+
+
+/* ============================================================
+   BADGE CHECK MARK
+   ============================================================ */
+
+.badge-check::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26px;
+  height: 14px;
+  border-left: 3px solid #3d404b;
+  border-bottom: 3px solid #3d404b;
+  transform: translate(-50%, -55%) rotate(-45deg);
+}
+
+
+
+
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+.animate-scroll-bounce {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes featuresDividerSweep {
+  0%,
+  100% {
+    transform: translateX(-100%);
+    opacity: 0.15;
+  }
+
+  50% {
+    transform: translateX(300%);
+    opacity: 0.95;
+  }
+}
+
+@keyframes featuresConnectorShimmer {
+  0% {
+    opacity: 0.15;
+    transform: translateY(-18%);
+  }
+
+  50% {
+    opacity: 0.28;
+  }
+
+  100% {
+    opacity: 0.15;
+    transform: translateY(18%);
+  }
+}
+
+.animate-features-divider-sweep {
+  animation: featuresDividerSweep 3.4s linear infinite;
+}
+
+.animate-features-connector-shimmer {
+  animation: featuresConnectorShimmer 3.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-bounce,
+  .animate-features-divider-sweep,
+  .animate-features-connector-shimmer {
+    animation: none;
+  }
+}
+
+
+/* ============================================================
+   MOBILE MENU TRANSITIONS
+   ============================================================ */
+
+.mobile-menu-closed {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+}
+
+.mobile-menu-open {
+  max-height: 400px;
+  padding-top: 16px;
+  padding-bottom: 24px;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+}
+
+
+/* ============================================================
+   HAMBURGER ANIMATION
+   ============================================================ */
+
+.hamburger-active .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger-active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-active .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
